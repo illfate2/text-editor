@@ -20,4 +20,13 @@ public class DefaultController implements Controller {
     public void SetActionOnItalic(EventHandler<ActionEvent> handler) {
         view.SetActionOnItalic(handler);
     }
+
+    public void SetActionOnSize(EventHandler<ActionEvent> handler) {
+        view.SetActionOnSize(handler);
+    }
+
+    public void SetActionOnFont(EventHandler<ActionEvent> handler) {
+        view.SetActionOnFont(handler);
+    }
+
 }

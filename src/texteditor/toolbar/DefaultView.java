@@ -2,6 +2,7 @@ package texteditor.toolbar;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.HBox;
@@ -46,5 +47,25 @@ public class DefaultView implements View {
 
     public boolean IsItalicSelected() {
         return italic.isSelected();
+    }
+
+    public Node GetView() {
+        return panel;
+    }
+
+    public String GetFont() {
+        return fontsBox.getValue();
+    }
+
+    public Integer GetSize() {
+        return sizeComboBox.getValue();
+    }
+
+    public void SetActionOnSize(EventHandler<ActionEvent> handler) {
+        sizeComboBox.setOnAction(handler);
+    }
+
+    public void SetActionOnFont(EventHandler<ActionEvent> handler) {
+        fontsBox.setOnAction(handler);
     }
 }
