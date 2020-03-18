@@ -10,11 +10,13 @@ public class View {
     private VBox vBox = new VBox();
     private texteditor.toolbar.View toolbarView;
     private texteditor.text.View textView;
+    private texteditor.options.View optionsView;
 
-    public View(texteditor.toolbar.View toolbarView, texteditor.text.View textView) {
+    public View(texteditor.toolbar.View toolbarView, texteditor.text.View textView, texteditor.options.View optionsView) {
         this.toolbarView = toolbarView;
         this.textView = textView;
-        vBox.getChildren().addAll(toolbarView.GetView(), textView.GetView());
+        this.optionsView = optionsView;
+        vBox.getChildren().addAll(optionsView.GetView(), toolbarView.GetView(), textView.GetView());
     }
 
     public boolean IsBoldSelected() {

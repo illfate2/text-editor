@@ -14,9 +14,8 @@ public class Controller {
     DefaultController textController;
 
     // TODO
-    public Controller(texteditor.toolbar.View toolbarView, texteditor.text.View textView,
-                      texteditor.toolbar.Controller toolbarController, DefaultController textController) {
-        view = new View(toolbarView, textView);
+    public Controller(View view, texteditor.toolbar.Controller toolbarController, DefaultController textController) {
+        this.view = view;
         toolbarController.SetActionOnItalic(actionEvent -> updateFont());
         toolbarController.SetActionOnBold(actionEvent -> updateFont());
         toolbarController.SetActionOnFont(actionEvent -> updateFont());
