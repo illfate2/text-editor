@@ -13,7 +13,9 @@ public class Main extends Application {
 
         texteditor.text.View textView = new texteditor.text.DefaultView();
         texteditor.text.DefaultController textController = new texteditor.text.DefaultController(textView);
-        texteditor.options.View optionsView = new texteditor.options.DefaultView();
+        texteditor.options.Model optionsModel = new texteditor.options.DefaultModel();
+        texteditor.options.View optionsView = new texteditor.options.DefaultView(optionsModel.getOptionNames());
+        texteditor.options.Controller optionsController = new texteditor.options.DefaultController(optionsModel, optionsView);
         View view = new View(toolbarView, textView, optionsView);
         Controller controller = new Controller(view, toolbarController, textController);
 
