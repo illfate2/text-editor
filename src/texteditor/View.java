@@ -1,10 +1,8 @@
 package texteditor;
 
-import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
 public class View {
     private VBox vBox = new VBox();
@@ -37,5 +35,14 @@ public class View {
 
     public Integer GetSize() {
         return toolbarView.GetSize();
+    }
+
+    public FileChooser openFileChooser() {
+        FileChooser fileChooser = new FileChooser();
+
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Text Files", "*.txt")
+        );
+        return fileChooser;
     }
 }

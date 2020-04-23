@@ -19,4 +19,12 @@ public class DefaultView implements View {
     public Node GetView() {
         return textArea;
     }
+
+    public void setText(String text) {
+        textArea.setText(text);
+    }
+
+    public String getText() {
+        return textArea.getText();
+    }
 }

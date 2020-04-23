@@ -1,15 +1,11 @@
 package texteditor.text;
 
-import javafx.scene.Node;
 import javafx.scene.text.Font;
 
-public interface View {
-    public void SetFont(Font font);
-
-    public Node GetView();
+public interface Controller {
+    public void setFont(Font font);
 
     public void setText(String text);
 
     public String getText();
-
 }

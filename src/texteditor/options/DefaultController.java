@@ -14,8 +14,11 @@ public class DefaultController implements Controller {
     }
 
     public void setActionOnOpenOption(EventHandler<ActionEvent> action) {
-        view.setActionOnMenuButton("Open", actionEvent -> {
-            FileChooser fileChooser = new FileChooser();
-        });
+        view.setActionOnMenuButton("Open", action);
     }
+
+    public void setActionOnSaveOption(EventHandler<ActionEvent> action) {
+        view.setActionOnMenuButton("Save", action);
+    }
+
 }

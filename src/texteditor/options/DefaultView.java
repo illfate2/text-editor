@@ -35,4 +35,8 @@ public class DefaultView implements View {
         optionsButtons.get(name).setOnAction(action);
     }
 
+    public void openFile(){
+
+    }
+
 }
