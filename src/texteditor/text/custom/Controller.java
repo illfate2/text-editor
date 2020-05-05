@@ -9,14 +9,12 @@ public class Controller implements texteditor.text.Controller {
     public Controller(texteditor.text.View view, Model model) {
         this.view = view;
         this.model = model;
-        setFont(Font.font(model.getGlobalFont(), model.getFontWeight(), model.getGlobalSize()));
+        setFont(model.getGlobalFont());
     }
 
     @Override
     public void setFont(Font font) {
-        model.setGlobalFont(font.getName());
-        model.setGlobalSize((int) font.getSize());
-//        model.setFontWeight();
+        model.setGlobalFont(font);
     }
 
     public void setFont(Font font, int from, int to) {

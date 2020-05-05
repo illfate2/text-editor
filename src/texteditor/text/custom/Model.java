@@ -4,38 +4,18 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class Model {
-    private String globalFont;
-    private Integer globalSize;
-    private FontWeight fontWeight;
+    private Font font;
 
     public Model(String font, Integer size) {
-        globalFont = font;
-        globalSize = size;
-        this.fontWeight = FontWeight.NORMAL;
+        this.font = Font.font(font, FontWeight.NORMAL, size);
     }
 
-    public void setGlobalFont(String globalFont) {
-        this.globalFont = globalFont;
+    public void setGlobalFont(Font font) {
+        this.font = font;
     }
 
-    public void setGlobalSize(Integer globalSize) {
-        this.globalSize = globalSize;
-    }
-
-    public Integer getGlobalSize() {
-        return globalSize;
-    }
-
-    public String getGlobalFont() {
-        return globalFont;
-    }
-
-    public FontWeight getFontWeight() {
-        return fontWeight;
-    }
-
-    public void setFontWeight(FontWeight fontWeight) {
-        this.fontWeight = fontWeight;
+    public Font getGlobalFont() {
+        return font;
     }
 }
 
