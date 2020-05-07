@@ -1,26 +1,19 @@
 package texteditor.text.custom;
 
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.text.Font;
-import javafx.scene.web.HTMLEditor;
 import texteditor.text.custom.canvas.CanvasEditor;
-
-import java.awt.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class View implements texteditor.text.View {
     CanvasEditor editor;
 
-    public View() {
-        editor = new CanvasEditor();
+    public View(Font font) {
+        editor = new CanvasEditor(font);
     }
 
     @Override
     public void SetFont(Font font) {
+        editor.setGlobalFont(font);
     }
 
     @Override
@@ -30,12 +23,21 @@ public class View implements texteditor.text.View {
 
     @Override
     public void setText(String text) {
+        editor.setText(text);
+    }
+
+    @Override
+    public void setGText(String text) {
+        editor.setGText(text);
     }
 
     @Override
     public String getText() {
-        return "";
+        return editor.getText();
     }
 
-
+    @Override
+    public String getGText() {
+        return editor.getJSONText();
+    }
 }

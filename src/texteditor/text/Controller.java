@@ -7,5 +7,11 @@ public interface Controller {
 
     public void setText(String text);
 
+    public void setGText(String text);
+
     public String getText();
+
+
+    public String getGText();
+
 }

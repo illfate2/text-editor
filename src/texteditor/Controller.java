@@ -46,23 +46,37 @@ public class Controller {
                 while (myReader.hasNextLine()) {
                     String data = myReader.nextLine();
                     resultStringBuilder.append(data);
-                    System.out.println(data);
                 }
                 myReader.close();
             } catch (IOException e) {
                 System.out.println("An error occurred.");
                 e.printStackTrace();
             }
-            textController.setText(resultStringBuilder.toString());
+            var filter = chooser.getSelectedExtensionFilter();
+            if (filter.getDescription().equals("Text Files")) {
+                textController.setText(resultStringBuilder.toString());
+                return;
+            }
+            if (filter.getDescription().equals("G Format")) {
+                textController.setGText(resultStringBuilder.toString());
+            }
         });
 
         optionsController.setActionOnSaveOption(actionEvent -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("Text Files", "*.txt")
+                    new FileChooser.ExtensionFilter("Text Files", "*.txt"),
+                    new FileChooser.ExtensionFilter("G Format", "*.gtxt")
             );
             File selectedFile = fileChooser.showSaveDialog(null);
-            saveTextToFile(textController.getText(), selectedFile);
+            var filter = fileChooser.getSelectedExtensionFilter();
+            if (filter.getDescription().equals("Text Files")) {
+                saveTextToFile(textController.getText(), selectedFile);
+                return;
+            }
+            if (filter.getDescription().equals("G Format")) {
+                saveTextToFile(textController.getGText(), selectedFile);
+            }
         });
 
         this.optionsController = optionsController;
@@ -84,7 +98,7 @@ public class Controller {
         root.getChildren().add(view.Get());
 
         primaryStage.setTitle("Text editor");
-        primaryStage.setScene(new Scene(root, 350, 275));
+        primaryStage.setScene(new Scene(root, 850, 500));
         primaryStage.show();
     }
 

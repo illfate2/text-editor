@@ -1,6 +1,7 @@
 package texteditor;
 
 import javafx.application.Application;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -11,7 +12,7 @@ public class Main extends Application {
         texteditor.toolbar.View toolbarView = new texteditor.toolbar.DefaultView(toolbarModel.getFonts(), toolbarModel.getSizes(), toolbarModel.getSize());
         texteditor.toolbar.Controller toolbarController = new texteditor.toolbar.DefaultController(toolbarModel, toolbarView);
 
-        texteditor.text.View textView = new texteditor.text.custom.View();
+        texteditor.text.View textView = new texteditor.text.custom.View(Font.font(toolbarModel.getFont(), toolbarModel.getSize()));
         texteditor.text.custom.Model textModel = new texteditor.text.custom.Model(toolbarModel.getFont(), toolbarModel.getSize());
         texteditor.text.Controller textController = new texteditor.text.custom.Controller(textView, textModel);
         texteditor.options.Model optionsModel = new texteditor.options.DefaultModel();

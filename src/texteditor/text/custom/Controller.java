@@ -14,12 +14,9 @@ public class Controller implements texteditor.text.Controller {
 
     @Override
     public void setFont(Font font) {
+        view.SetFont(font);
         model.setGlobalFont(font);
     }
-
-    public void setFont(Font font, int from, int to) {
-    }
-
 
     @Override
     public void setText(String text) {
@@ -27,7 +24,17 @@ public class Controller implements texteditor.text.Controller {
     }
 
     @Override
+    public void setGText(String text) {
+        view.setGText(text);
+    }
+
+    @Override
     public String getText() {
         return view.getText();
+    }
+
+    @Override
+    public String getGText() {
+        return view.getGText();
     }
 }
