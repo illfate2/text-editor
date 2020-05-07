@@ -25,6 +25,7 @@ public class DefaultView implements View {
             items[counter++] = item;
         }
         menuButton = new MenuButton("Options", null, items);
+        menuButton.setStyle("-fx-background-color: rgba(187,89,255,0.5);");
     }
 
     public Node GetView() {

@@ -26,7 +26,7 @@ public class CanvasEditor {
 
     public CanvasEditor(Font defaultFont) {
         this.setGlobalFont(defaultFont);
-        this.canvas = new Canvas(800, 400);
+        this.canvas = new Canvas(800, 800);
         characters = new ArrayList<>();
         canvas.setFocusTraversable(true);
         canvas.addEventFilter(MouseEvent.ANY, (e) -> canvas.requestFocus());
@@ -39,7 +39,7 @@ public class CanvasEditor {
                 "-fx-border-width: 2;" +
                 "-fx-border-insets: 5;" +
                 "-fx-border-radius: 0;" +
-                "-fx-border-color: #3f1719;");
+                "-fx-border-color: #3f370b;");
 
         pane.getChildren().add(canvas);
         cursor = new Character(true);
@@ -226,7 +226,7 @@ public class CanvasEditor {
             gc.setFont(c.getFont());
             int idx = characters.indexOf(c);
             if (idx >= leftSelected.get() && idx <= rightSelected.get()) {
-                gc.setFill(Color.BLUE);
+                gc.setFill(Color.RED);
                 gc.fillText(c.getCharacter(), x, y);
                 x = x + c.getSize() / 1.5;
                 continue;
