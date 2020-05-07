@@ -1,32 +1,28 @@
 package texteditor.text.custom.canvas;
 
 import com.google.gson.Gson;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-import java.lang.reflect.Type;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CanvasEditor {
     private Canvas canvas;
     private Pane pane;
     private Integer x = 0;
     private ArrayList<Character> characters;
+    private ArrayList<Character> buffer;
     private Font globalFont;
     private Character cursor;
+    private AtomicInteger leftSelected;
+    private AtomicInteger rightSelected;
 
     public CanvasEditor(Font defaultFont) {
         this.setGlobalFont(defaultFont);
@@ -48,10 +44,10 @@ public class CanvasEditor {
         pane.getChildren().add(canvas);
         cursor = new Character(true);
         characters.add(cursor);
+        buffer = new ArrayList<>();
 
-
-        int leftSelected, rightSelected;
-        ArrayList<Character> selected = new ArrayList<>();
+        leftSelected = new AtomicInteger(-1);
+        rightSelected = new AtomicInteger(-1);
         pane.setOnKeyPressed(keyEvent -> {
             int idx = characters.indexOf(cursor);
             switch (keyEvent.getCode()) {
@@ -71,8 +67,14 @@ public class CanvasEditor {
                     characters.add(idx - 1, cursor);
                     characters.remove(idx + 1);
                     if (keyEvent.isShiftDown()) {
-                        selected.add(characters.get(idx));
+                        leftSelected.set(idx);
+                        if (rightSelected.get() == -1) {
+                            rightSelected.set(leftSelected.get());
+                        }
+                        break;
                     }
+                    leftSelected.set(-1);
+                    rightSelected.set(-1);
                     break;
                 case RIGHT:
                     if (idx > characters.size() - 2) {
@@ -80,6 +82,8 @@ public class CanvasEditor {
                     }
                     characters.remove(idx);
                     characters.add(idx + 1, cursor);
+                    leftSelected.set(-1);
+                    rightSelected.set(-1);
                     break;
                 case SHIFT:
                 case CONTROL:
@@ -87,12 +91,25 @@ public class CanvasEditor {
                     break;
                 case C:
                     if (keyEvent.isControlDown()) {
-                        System.out.println(selected);
-                        characters.
+                        buffer.clear();
+                        for (int i = leftSelected.get(); i <= rightSelected.get(); ++i) {
+                            buffer.add(characters.get(i));
+                        }
+                        break;
+                    }
+                    characters.add(idx, new Character(keyEvent.getText(), globalFont));
+                    leftSelected.set(-1);
+                    rightSelected.set(-1);
+                    break;
+                case V:
+                    if (keyEvent.isControlDown()) {
+                        characters.addAll(characters.indexOf(cursor), buffer);
                         break;
                     }
                 default:
                     characters.add(idx, new Character(keyEvent.getText(), globalFont));
+                    leftSelected.set(-1);
+                    rightSelected.set(-1);
                     break;
             }
             render();
@@ -132,6 +149,12 @@ public class CanvasEditor {
 
     public void setGlobalFont(Font globalFont) {
         this.globalFont = globalFont;
+        if (leftSelected != null && leftSelected.get() != -1 && rightSelected.get() != 1) {
+            for (int i = leftSelected.get(); i <= rightSelected.get(); ++i) {
+                characters.get(i).setFont(globalFont);
+            }
+            render();
+        }
     }
 
     public Node getView() {
@@ -201,6 +224,14 @@ public class CanvasEditor {
             }
             var gc = canvas.getGraphicsContext2D();
             gc.setFont(c.getFont());
+            int idx = characters.indexOf(c);
+            if (idx >= leftSelected.get() && idx <= rightSelected.get()) {
+                gc.setFill(Color.BLUE);
+                gc.fillText(c.getCharacter(), x, y);
+                x = x + c.getSize() / 1.5;
+                continue;
+            }
+            gc.setFill(Color.BLACK);
             gc.fillText(c.getCharacter(), x, y);
             x = x + c.getSize() / 1.5;
         }
