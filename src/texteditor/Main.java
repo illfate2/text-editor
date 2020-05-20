@@ -7,7 +7,6 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
-        // TODO factory
         texteditor.toolbar.Model toolbarModel = new texteditor.toolbar.DefaultModel();
         texteditor.toolbar.View toolbarView = new texteditor.toolbar.DefaultView(toolbarModel.getFonts(), toolbarModel.getSizes(), toolbarModel.getSize());
         texteditor.toolbar.Controller toolbarController = new texteditor.toolbar.DefaultController(toolbarModel, toolbarView);

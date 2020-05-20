@@ -15,12 +15,9 @@ import java.util.Scanner;
 
 
 public class Controller {
-    View view;
-    texteditor.toolbar.Controller toolbarController;
-    texteditor.text.Controller textController;
-    texteditor.options.Controller optionsController;
+    private View view;
+    private texteditor.text.Controller textController;
 
-    // TODO
     public Controller(View view,
                       texteditor.toolbar.Controller toolbarController,
                       texteditor.text.Controller textController,
@@ -30,7 +27,6 @@ public class Controller {
         toolbarController.SetActionOnBold(actionEvent -> updateFont());
         toolbarController.SetActionOnFont(actionEvent -> updateFont());
         toolbarController.SetActionOnSize(actionEvent -> updateFont());
-        this.toolbarController = toolbarController;
         this.textController = textController;
 
 
@@ -79,7 +75,6 @@ public class Controller {
             }
         });
 
-        this.optionsController = optionsController;
     }
 
     private void saveTextToFile(String content, File file) {
@@ -102,7 +97,6 @@ public class Controller {
         primaryStage.show();
     }
 
-    // TODO normal builder
     private void updateFont() {
         System.out.println(view.GetFont());
         if (view.IsBoldSelected() && !view.IsItalicSelected()) {

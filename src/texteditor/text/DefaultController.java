@@ -3,7 +3,7 @@ package texteditor.text;
 import javafx.scene.text.Font;
 
 public class DefaultController  {
-    View view;
+    private View view;
 
     public DefaultController(View view) {
         this.view = view;

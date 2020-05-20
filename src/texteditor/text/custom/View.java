@@ -6,8 +6,8 @@ import javafx.scene.text.Font;
 import texteditor.text.custom.canvas.CanvasEditor;
 
 public class View implements texteditor.text.View {
-    CanvasEditor editor;
-    ScrollPane scrollPane;
+    private CanvasEditor editor;
+    private ScrollPane scrollPane;
 
     public View(Font font) {
 

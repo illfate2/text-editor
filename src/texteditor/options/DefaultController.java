@@ -5,8 +5,8 @@ import javafx.event.EventHandler;
 import javafx.stage.FileChooser;
 
 public class DefaultController implements Controller {
-    Model model;
-    View view;
+    private Model model;
+    private View view;
 
     public DefaultController(Model model, View view) {
         this.view = view;

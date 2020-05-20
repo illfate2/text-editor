@@ -3,8 +3,8 @@ package texteditor.text.custom;
 import javafx.scene.text.Font;
 
 public class Controller implements texteditor.text.Controller {
-    texteditor.text.View view;
-    Model model;
+    private texteditor.text.View view;
+    private Model model;
 
     public Controller(texteditor.text.View view, Model model) {
         this.view = view;

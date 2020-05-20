@@ -7,7 +7,7 @@ import javafx.scene.text.Font;
 
 public class DefaultView {
 
-    TextArea textArea = new TextArea();
+    private TextArea textArea = new TextArea();
 
     public DefaultView() {
     }
